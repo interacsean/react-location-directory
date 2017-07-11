@@ -3,7 +3,8 @@
 This project is a tech demo for what I hope to develop into a location based directory boilerplate.
 
 Please Note:
-* Search results drawn from DataSourceDummy are random variations on the selected location.
+* Search results drawn from DataSourceDummy are random variations on the selected location. 
+* Occasionally (by design!) DataSourceDummy will mimick there being no search results in the selected location.
 * The links from the nav menu do not have active pages.
 
 ## Techonolgies used:
