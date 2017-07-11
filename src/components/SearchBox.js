@@ -1,22 +1,33 @@
 import React, { Component } from "react";
 import SearchAutoComplete  from "./SearchAutoComplete";
-import DebounceInput from 'react-debounce-input';
+import PropTypes from "prop-types";
+import DebounceInput from "react-debounce-input";
 
 import './SearchBox.scss';
 
 class SearchBox extends Component {
 
+	static propTypes = {
+		"searchTerm":  PropTypes.string,
+	}
+
+	static defaultProps = {
+		"searchTerm": "",
+	}
+
 	constructor(props){
 		super(props);
 
+		/*
+		 * Stores the state of the SearchBox's focus, and when not null, stores
+		 * the id of timeout for cancellation 
+		 */
 		this.focusCancelDebounce = null;
 
 		this.state = {
 			searchTerm: (props.searchTerm ? props.searchTerm : ""),
-			hasFocus: false
+			hasFocus: false,
 		}
-		// this seems better
-//		this.setState({keywords: ''});
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -25,7 +36,7 @@ class SearchBox extends Component {
 		}
 	}
 
-	updateSearch(e){
+	_updateSearch(e){
 		this.setState({ searchTerm: e.target.value });
 	}
 
@@ -35,19 +46,20 @@ class SearchBox extends Component {
 	 * Sets the focus to true if focus is gained, cancels any deferred instructions 
 	 * from the blur (lostFocus)
 	 */
-	getsFocus(){
+	_getsFocus(){
 		this.setState({ hasFocus: true });
 		if (this.focusCancelDebounce !== null){
 			clearTimeout(this.focusCancelDebounce);
 			this.focusCancelDebounce = null;
 		}
 	}
+
 	/**
 	 * Manage the focus state of this object, in conjuction with getsFocus
 	 *
 	 * Sets a small delay after a blur to allow the focus to be retained
 	 */
-	lostFocus(){
+	_lostFocus(){
 		this.focusCancelDebounce = setTimeout(()=>{
 			this.setState({ hasFocus: false });
 		}, 100);
@@ -57,29 +69,29 @@ class SearchBox extends Component {
 		return (
 			<div 
 				className="searchBox"
-				onFocus={this.getsFocus.bind(this)}
-                onBlur={this.lostFocus.bind(this)}
+				onFocus={this._getsFocus.bind(this)}
+                onBlur={this._lostFocus.bind(this)}
             >
         	{ /* This has a buggg, if you select the text and type-over, it clears it out */ }	
 				<DebounceInput
 					debounceTimeout={200} 
 					minLength={3}
-                    placeholder="Search for NMMNG Groups" 
+                    placeholder="Search for groups" 
                     value={this.state.searchTerm} 
-                    onChange={this.updateSearch.bind(this)}
+                    onChange={this._updateSearch.bind(this)}
                 />
 				{ 
-					this.state.searchTerm !== "" && this.state.hasFocus
+					( this.state.searchTerm !== "" && this.state.hasFocus )
 						? <SearchAutoComplete
 							searchTerm={this.state.searchTerm}
-							onSelect={this.lostFocus.bind(this)}
+							onSelect={this._lostFocus.bind(this)}
 						/>
 						: ""
 				}
 			</div>
-		);
+		); // /
 	}
 
 }
 
-export default SearchBox
+export default SearchBox;

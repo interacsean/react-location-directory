@@ -1,4 +1,7 @@
-// 
+/*
+ * The width at which the layout transitions from stacked header components
+ * to horizontally adjacent
+ */ 
 $respCollapseWidth: 510px;
 
 .siteHeader{
@@ -18,10 +21,10 @@ $respCollapseWidth: 510px;
 	}
 }
 
-// These components must always be nested under .siteHeader
+// These components are intended to always be nested under .siteHeader
 .siteLogo, .searchBox, .siteNav{
 	flex: auto;
-	padding: 5px 0;
+	margin: 5px 0;
 
 	@media (min-width: $respCollapseWidth){
 		width: auto;

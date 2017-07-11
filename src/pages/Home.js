@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import './Home.scss';
+import React, { Component } from "react";
+import "./Home.scss";
 
-import SiteLogo from '../../components/SiteLogo';
-import SiteNav from '../../components/SiteNav';
-import SearchBox from '../../components/SearchBox';
-import ResultsList from '../../components/ResultsList';
-import Helpers from '../../services/Helpers';
+import SiteLogo from "../components/SiteLogo";
+import SiteNav from "../components/SiteNav";
+import SearchBox from "../components/SearchBox";
+import ResultsList from "../components/ResultsList";
+import Helpers from "../services/Helpers";
 
 class Home extends Component {
   

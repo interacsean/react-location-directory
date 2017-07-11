@@ -5,13 +5,13 @@ import {
     Route,
 } from 'react-router-dom';
 
-import './reset.scss';
 import './variables.scss';
+import './styles.scss';
 
-import Home from './pages/Home/Home';
-import Results from './pages/Results/Results';
-import Map from './pages/Map/Map';
-import NotFound from './pages/NotFound/NotFound';
+import Home from './pages/Home';
+import Listing from './pages/Listing';
+import Map from './pages/Map';
+import NotFound from './pages/NotFound';
 
 class App extends Component {
     render() {
@@ -19,7 +19,7 @@ class App extends Component {
             <Router>
                 <div className="App" >
                     <Switch>
-                        <Route path="/results" component={Results}/>
+                        <Route path="/listing/:id" component={Listing}/>
                         <Route exact path="/search/:locFriendly/:locCode?" component={Home}/>
                         <Route exact path="/" component={Home}/>
                         <Route component={NotFound} />

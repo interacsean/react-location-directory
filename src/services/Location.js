@@ -9,7 +9,7 @@ class Location {
      */
     static getSuggestions(input){
 
-        let p = new Promise( (resolve, reject) => {
+        return new Promise( (resolve, reject) => {
 
             try {
                 /* 
@@ -17,8 +17,7 @@ class Location {
                  * I am aware it's a bit ugly with it being global...
                  */
                 // eslint-disable-next-line no-undef
-                let gAcs = new google.maps.places.AutocompleteService();
-                gAcs.getPlacePredictions(
+                (new google.maps.places.AutocompleteService()).getPlacePredictions(
                     {
                         'input': input,
                         'types': ['(cities)']
@@ -26,20 +25,14 @@ class Location {
                     },
                     (placeResult, placesServiceStatus)=>{
                         if (placeResult === null){
-                            reject();
+                            reject(placesServiceStatus);
                         }else{
                             // could use Promise.all() if I need to get place details of each for LatLng purposes
                             resolve(placeResult.map( (place)=>{
+                                // Redundant key filter.
                                 let { description, place_id } = place;
                                 return { description, place_id };
-                                /*googlePlacesService = new google.maps.places.PlacesService(document.getElementById("q"));
-                                googlePlacesService.getDetails({
-                                    reference: predictions[i].reference
-                                }, function(details, status){
-                                    if(details){
-                                        console.log(details.geometry.location.toString());
-                                    }
-                                });*/
+                                
                             } ));
                         }  
                     }
@@ -50,7 +43,36 @@ class Location {
             
         } );
 
-        return p;
+    }
+
+    static getPlaceDetails(placeId){
+
+        return new Promise( (resolve, reject) => {
+
+            try {
+                /* 
+                 * Using the globally available google module
+                 * I am aware it's a bit ugly with it being global...
+                 * For some reason, PlacesService also wants an HTML element
+                 * to work properly.  Ok, here's one... go nuts.
+                 */
+                // eslint-disable-next-line no-undef
+                (new google.maps.places.PlacesService(document.createElement('div'))).getDetails(
+                    { placeId },
+                    ( placeResult, placesServiceStatus )=>{
+                        if (placeResult === null){
+                            reject(placesServiceStatus);
+                        }else{
+                            resolve(placeResult);
+                        }  
+                    }
+                );
+
+            }catch(e){
+                reject(e);
+            }
+            
+        } );
 
     }
 

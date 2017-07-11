@@ -5,3 +5,6 @@
 $overHighlightBg: #eeeeee;
 $overHighlightFg: #0000ff;
 
+@mixin border-box {
+	box-sizing: border-box;
+}
