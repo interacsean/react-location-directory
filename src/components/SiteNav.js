@@ -8,7 +8,9 @@ class SiteNav extends Component {
 	render(){
 		return (
 			<div className="siteNav">
-				<Link to='/about'>About</Link> | <Link to="/start">Start</Link> | <Link to="/manage">Manage</Link>
+				<Link to='/about' className="dummyLink">About</Link>
+				&nbsp;| <Link to="/start" className="dummyLink">Start</Link>
+				&nbsp;| <Link to="/manage" className="dummyLink">Manage</Link>
 			</div>
 		)
 	}

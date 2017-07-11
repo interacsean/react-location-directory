@@ -1,4 +1,4 @@
-@import '../variables.scss';
+@import "../variables.scss";
 
 $searchBoxHeight: 1.5rem;
 
@@ -12,6 +12,7 @@ $searchBoxHeight: 1.5rem;
 .searchAutoComplete {
 	/* structural */
 	position: absolute;
+	z-index: 10;
 	left: 0;
 	top: $searchBoxHeight;
 	

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-//import './Home.css';
+import React, { Component } from "react";
+//import "./Home.css";
 
 class NotFound extends Component {
 

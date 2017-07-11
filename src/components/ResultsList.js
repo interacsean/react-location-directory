@@ -5,6 +5,8 @@ import Location from "../services/Location";
 import ListingData from "../services/ListingData";
 import Result from "./Result";
 
+import "./ResultsList.scss";
+
 /**
  * The list of search results.
  */
@@ -23,24 +25,27 @@ class ResultsList extends Component {
 	constructor(props){
 		super(props);
 
+		this._refreshPlaceDetails(props.locCode);
+
 		this.state = {
 			"searchTerm": props.searchTerm,
 			"locCode": props.locCode,
-			"results": []
+			"results": [],
+			"searching": true
 		};
 
-		this._refreshPlaceDetails(props.locCode);
 	}
 
 	componentWillReceiveProps(nextProps) {
 
+		this._refreshPlaceDetails(nextProps.locCode);
+
 		this.setState({
 			"searchTerm": nextProps.searchTerm,
 			"locCode": nextProps.locCode,
+			"searching": true
 		});
-
 		
-		this._refreshPlaceDetails(nextProps.locCode);
 	}
 
 	_refreshPlaceDetails(locCode) {
@@ -48,7 +53,7 @@ class ResultsList extends Component {
 			// Tidyup: Possibly a better way to chain these promises.
 			Location.getPlaceDetails(locCode).then( ( placeDetails )=>{
 				ListingData.getListingsNearPlace( placeDetails ).then( (results)=>{
-					this.setState( {"results": results} );	
+					this.setState( {"results": results, "searching": false} );	
 				} );
 			});
 		}
@@ -56,18 +61,28 @@ class ResultsList extends Component {
 
 	render(){
 		return (
-			<div className="ResultsList">
+			<div className="resultsList">
 			{
-				this.state.results.map((result)=>{
-					return (
-						<Result 
-						 	key={result['place_name']+"+"+result['listing_name']}
-							listingName={result['listing_name']}
-							placeName={result['place_name']}
-							dist={result.dist}
-						/>
-					);
-				})
+				this.state.results.length === 0 
+					? (
+						<div className="notice">
+							{
+								this.state.searching
+									? "Searching for groups in that location"
+									: "There were no listings found in that location"
+							}
+						</div>
+					  )
+					: this.state.results.map((result)=>{
+						return (
+							<Result 
+							 	key={result['place_name']+"+"+result['listing_name']}
+								listingName={result['listing_name']}
+								placeName={result['place_name']}
+								dist={result.dist}
+							/>
+						);
+					})
 			}
 			</div>
 		);

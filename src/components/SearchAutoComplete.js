@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import Location from '../services/Location';
-import Helpers from '../services/Helpers';
+import Location from "../services/Location";
+import Helpers from "../services/Helpers";
 
 /**
  * The dropdown portion of the SearchBox.

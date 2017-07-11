@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { 
     BrowserRouter as Router,
     Switch,
     Route,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import './variables.scss';
-import './styles.scss';
+import "./variables.scss";
+import "./styles.scss";
 
-import Home from './pages/Home';
-import Listing from './pages/Listing';
-import Map from './pages/Map';
-import NotFound from './pages/NotFound';
+import Home from "./pages/Home";
+import Listing from "./pages/Listing";
+import Map from "./pages/Map";
+import NotFound from "./pages/NotFound";
 
 class App extends Component {
     render() {

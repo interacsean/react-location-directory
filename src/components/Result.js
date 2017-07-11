@@ -6,7 +6,7 @@ class Result extends Component {
 			<div className="listingResult">
 				<h2>{this.props.listingName}</h2>
 				<h3>{this.props.placeName}</h3>
-				<span>{this.props.dist}</span>
+				<span className="dist">{this.props.dist} miles away</span>
 			</div>
 		)
 	}

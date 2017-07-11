@@ -3,7 +3,7 @@ import SearchAutoComplete  from "./SearchAutoComplete";
 import PropTypes from "prop-types";
 import DebounceInput from "react-debounce-input";
 
-import './SearchBox.scss';
+import "./SearchBox.scss";
 
 class SearchBox extends Component {
 

@@ -1,6 +1,6 @@
 
 // Replace this with a `DataSource` linked to something actual.
-import DataSource from './DataSource/DataSourceDummy.js';
+import DataSource from "./DataSource/DataSourceDummy.js";
 
 // class ListingDataRequestObj {
 
