@@ -1,6 +1,6 @@
-/**
- * Site styles
- */
+//**
+// * Site style variables
+// */
  
 $overHighlightBg: #eeeeee;
 $overHighlightFg: #0000ff;
@@ -8,8 +8,4 @@ $lightSeparator: #999999;
 
 @mixin border-box {
 	box-sizing: border-box;
-}
-
-.dummyLink, .dummyLink:visited{
-	color: #ccc;
 }

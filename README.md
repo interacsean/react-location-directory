@@ -13,9 +13,9 @@ _It was built quickly and there are many improvements yet to be made (see Todo l
 
 * React
 * Webpack 2
-* SCSS, vaguely complying to 
+* SCSS, complying to OOCSS
 * HTML & CSS3 (flexbox, responsive breakpoints)
-* Google places API
+* Google places API.
 
 ## Todo list:
 * Create a Listing Page route for page details
