@@ -3,59 +3,59 @@
 $resultsListingCollapseWidth: 550px;
 
 .resultsList{
-	padding:0 10px;
+  padding:0 10px;
 
-	@media (min-width: $resultsListingCollapseWidth){ 
-		display: flex;
-		flex-wrap: wrap;
-	}
+  @media (min-width: $resultsListingCollapseWidth){ 
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .listingResult{
-	position: relative;
-	padding:0.5em;
-	border-bottom:1px solid $lightSeparator;
+  position: relative;
+  padding:0.5em;
+  border-bottom:1px solid $lightSeparator;
 
-	&:last-child{
-		border-bottom: none;
-	}
+  &:last-child{
+    border-bottom: none;
+  }
 
-	>h2{
-		margin: 0 0 0.25em 0;
-	}
+  >h2{
+    margin: 0 0 0.25em 0;
+  }
 
-	>h3{
-		margin: 0.25em 0;
-		color: #666;
-		font-weight: normal;
-	}
+  >h3{
+    margin: 0.25em 0;
+    color: #666;
+    font-weight: normal;
+  }
 
-	>.dist{
-		position: absolute;
-		top:0.5em;
-		right:0;
-	}
+  >.dist{
+    position: absolute;
+    top:0.5em;
+    right:0;
+  }
 
-	@media (min-width: $resultsListingCollapseWidth){ 
-		@include border-box;
+  @media (min-width: $resultsListingCollapseWidth){ 
+    @include border-box;
 
-		width: calc(33% - 10px);
-		min-width: 14em;
-		max-width: 20em;
-		flex: 1;
-		margin: 5px;
-		border: 1px solid $lightSeparator;
+    width: calc(33% - 10px);
+    min-width: 14em;
+    max-width: 20em;
+    flex: 1;
+    margin: 5px;
+    border: 1px solid $lightSeparator;
 
-		&:last-child{
-			border-bottom: 1px solid $lightSeparator;
-		}
+    &:last-child{
+      border-bottom: 1px solid $lightSeparator;
+    }
 
-		>.dist{
-			position: initial;
-			text-align:right;
-			display: inline-block;
-		}
+    >.dist{
+      position: initial;
+      text-align:right;
+      display: inline-block;
+    }
 
 
-	}
+  }
 }

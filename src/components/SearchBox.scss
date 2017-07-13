@@ -3,35 +3,35 @@
 $searchBoxHeight: 1.5rem;
 
 .searchBox{
-	position: relative;
-	& > input{
-		height: $searchBoxHeight;
-	}
+  position: relative;
+  & > input{
+    height: $searchBoxHeight;
+  }
 }
 
 .searchAutoComplete {
-	/* structural */
-	position: absolute;
-	z-index: 10;
-	left: 0;
-	top: $searchBoxHeight;
-	
-	width: 50%;
-	min-width:310px;
-	max-width: 400px;
+  /* structural */
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: $searchBoxHeight;
+  
+  width: 50%;
+  min-width:310px;
+  max-width: 400px;
 
-	/* presentational */
-	text-align:left;
-	border: 1px solid #666;
-	background-color: white;
+  /* presentational */
+  text-align:left;
+  border: 1px solid #666;
+  background-color: white;
 
-	& > .searchAutoComplete-item{
-		padding: 0.6rem 0;
-		display: block;
+  & > .searchAutoComplete-item{
+    padding: 0.6rem 0;
+    display: block;
 
-		&:hover{
-			color: $overHighlightFg;
-			background-color: $overHighlightBg;
-		}
-	}
+    &:hover{
+      color: $overHighlightFg;
+      background-color: $overHighlightBg;
+    }
+  }
 }

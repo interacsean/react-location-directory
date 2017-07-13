@@ -5,66 +5,66 @@
 $respCollapseWidth: 510px;
 
 .siteHeader{
-	/* structural */
-	justify-content: space-between;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+  /* structural */
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 
-	/* presentational */
-	padding: 5px 10px;
-	border-bottom: 1px solid #888;
+  /* presentational */
+  padding: 5px 10px;
+  border-bottom: 1px solid #888;
 
-	@media (min-width: $respCollapseWidth){
-		padding: 20px 10px;
-		flex-direction: row;
-	}
+  @media (min-width: $respCollapseWidth){
+    padding: 20px 10px;
+    flex-direction: row;
+  }
 }
 
 // These components are intended to always be nested under .siteHeader
 .siteLogo, .searchBox, .siteNav{
-	flex: auto;
-	margin: 5px 0;
+  flex: auto;
+  margin: 5px 0;
 
-	@media (min-width: $respCollapseWidth){
-		width: auto;
-		flex: 1;
-	}
+  @media (min-width: $respCollapseWidth){
+    width: auto;
+    flex: 1;
+  }
 }
 
 .siteLogo{
-	width: 50%;
+  width: 50%;
 
-	@media (min-width: $respCollapseWidth){
-		width: 100%;
-	}
+  @media (min-width: $respCollapseWidth){
+    width: 100%;
+  }
 }
 
 .siteNav{
-	/*min-width: { ( $respCollapseWidth / 2) + 1 };*/
-	width: 50%;
-	min-width: 175px;
-	text-align: right;
+  /*min-width: { ( $respCollapseWidth / 2) + 1 };*/
+  width: 50%;
+  min-width: 175px;
+  text-align: right;
 
-	@media (min-width: $respCollapseWidth){
-		/* structural */
-		order: 3;
-		/* presentational */
-		width: auto;
-	}
+  @media (min-width: $respCollapseWidth){
+    /* structural */
+    order: 3;
+    /* presentational */
+    width: auto;
+  }
 }
 
 .searchBox {
-	width: 100%;
+  width: 100%;
 
-	&>input{
-		width:100%;
-	}
+  &>input{
+    width:100%;
+  }
 
-	@media (min-width: $respCollapseWidth){
-		/* structural */
-		order: 2;
-		/* presentational */
-		width: auto;
-	}
+  @media (min-width: $respCollapseWidth){
+    /* structural */
+    order: 2;
+    /* presentational */
+    width: auto;
+  }
 }

@@ -2,25 +2,26 @@ import React, { Component } from "react";
 
 class Tpl extends Component {
 
-	static propTypes = {}
-	static defaultProps = {}
+  static propTypes = {}
+  static defaultProps = {}
 
-	constructor(props){
-		super(props);
+  constructor(props){
+    super(props);
 
-		this.state = {};
-	}
+    this.state = {};
+  }
 
-	componentWillReceiveProps(nextProps) {
-		//doathing
-	}
+  componentWillReceiveProps(nextProps) {
+    //doathing
+  }
 
-	render(){
-		return (
-			<div className="Tpl">
-			</div>
-		)
-	}
+  render(){
+    return (
+      <div className="Tpl">
+      </div>
+    )
+  }
+  
 }
 
 export default Tpl;

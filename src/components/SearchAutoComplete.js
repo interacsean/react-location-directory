@@ -14,69 +14,68 @@ import Helpers from "../services/Helpers";
  */
 class SearchAutoComplete extends Component {
 
-	static propTypes = {
-		searchTerm: PropTypes.string
-	}
+  static propTypes = {
+    searchTerm: PropTypes.string
+  }
 
-	static defaultProps = {
-		searchTerm: ""
-	}
+  static defaultProps = {
+    searchTerm: ""
+  }
 
-	constructor(props){
-		super(props);
+  constructor(props){
+    super(props);
+    this.state = {'suggestions': []};
+    this._updateSuggestions(props);
+  }
 
-		this.state = {'suggestions': []};
-		this._updateSuggestions(props);
-	}
+  componentWillReceiveProps(nextProps) {
+    this._updateSuggestions(nextProps);
+  }
 
-	componentWillReceiveProps(nextProps) {
-		this._updateSuggestions(nextProps);
-	}
+  _updateSuggestions(props){
+    Location.getSuggestions(props.searchTerm)
+      .then( (suggestions)=>{
+         this.setState( { suggestions } );
+      } );
+  }
 
-	_updateSuggestions(props){
-		Location.getSuggestions(props.searchTerm)
-			.then( (suggestions)=>{
-		 		this.setState( { suggestions } );
-			} );
-	}
+  suggestionClick(e){
+    this.props.onSelect();
+  }
 
-	suggestionClick(e){
-		this.props.onSelect();
-	}
+  // todo, decide what wrapper to use, searchAutoComplete or AutoComplete, don't need both
+  renderList(suggestions){
+    return (
+      <div className="searchAutoComplete"> 
+      { 
+        suggestions.map( (suggestion)=>{
+          return (
+            <Link 
+              key={suggestion.place_id}
+              className="searchAutoComplete-item" 
+              to={"/search/"+Helpers.toUrlFriendly(suggestion.description)+"/"+suggestion.place_id}
+              onClick={this.suggestionClick.bind(this)}
+            >
+              {suggestion.description} <span className="distanceFromMe"></span>
+            </Link>
+          )
+        }) 
+      } 
+      </div>
+    );
+  }
 
-	// todo, decide what wrapper to use, searchAutoComplete or AutoComplete, don't need both
-	renderList(suggestions){
-		return (
-			<div className="searchAutoComplete"> 
-			{ 
-				suggestions.map( (suggestion)=>{
-					return (
-						<Link 
-							key={suggestion.place_id}
-							className="searchAutoComplete-item" 
-							to={"/search/"+Helpers.toUrlFriendly(suggestion.description)+"/"+suggestion.place_id}
-							onClick={this.suggestionClick.bind(this)}
-						>
-							{suggestion.description} <span className="distanceFromMe"></span>
-						</Link>
-					)
-				}) 
-			} 
-			</div>
-		);
-	}
-
-	render(){
-		return (
-			<div className="AutoComplete">
-				{
-					this.state.suggestions.length > 0 
-						? this.renderList(this.state.suggestions) 
-						: ""
-				}
-			</div>
-		);
-	} 
+  render(){
+    return (
+      <div className="AutoComplete">
+        {
+          this.state.suggestions.length > 0 
+            ? this.renderList(this.state.suggestions) 
+            : ""
+        }
+      </div>
+    );
+  } 
 
 }
 
