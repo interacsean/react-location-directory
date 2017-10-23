@@ -12,16 +12,6 @@ import "./ResultsList.scss";
  */
 class ResultsList extends Component {
 
-  static propTypes = {
-    "searchTerm": PropTypes.string,
-    "locCode": PropTypes.string,
-  }
-
-  static defaultProps = {
-    "searchTerm": "",
-    "locCode": "",
-  }
-
   constructor(props){
     super(props);
     this._refreshPlaceDetails(props.locCode);
@@ -82,6 +72,16 @@ class ResultsList extends Component {
     );
   }
   
+}
+
+ResultsList.propTypes = {
+  "searchTerm": PropTypes.string,
+  "locCode": PropTypes.string,
+}
+
+ResultsList.defaultProps = {
+  "searchTerm": "",
+  "locCode": "",
 }
 
 export default ResultsList;

@@ -27,8 +27,4 @@ _It was built quickly and there are many improvements yet to be made (see Todo l
 * Add SCSS autoprefixer [https://github.com/postcss/autoprefixer]
 * Write component tests
 * Search for `Tidyup` for pieces of code I think I could write more efficiently.
-* Debug DebounceInput component (see known issues below)
 
-## Known issues
-
-The DebounceInput component currently has a bug in some situations when using the keyboard.  To replicate, begin typing the name of a city, then select the text using shift+home keys and begin typing.  After the debounce period, the text field will empty itself, removing the characters you have begun to type.  This component is a community developed package and I plan on debugging the issue to submit a patch/PR.

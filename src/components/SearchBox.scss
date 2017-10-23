@@ -2,14 +2,14 @@
 
 $searchBoxHeight: 1.5rem;
 
-.searchBox{
+.react-autosuggest__container{
   position: relative;
   & > input{
     height: $searchBoxHeight;
   }
 }
 
-.searchAutoComplete {
+.react-autosuggest__suggestions-container--open {
   /* structural */
   position: absolute;
   z-index: 10;
@@ -24,14 +24,19 @@ $searchBoxHeight: 1.5rem;
   text-align:left;
   border: 1px solid #666;
   background-color: white;
+}
 
-  & > .searchAutoComplete-item{
-    padding: 0.6rem 0;
+  .react-autosuggest__suggestions-list{
+    margin: 0;
+    padding: 0;
+  }
+
+  .react-autosuggest__suggestion{
+    padding: 0.6rem;
     display: block;
+  }
 
-    &:hover{
+  .react-autosuggest__suggestion--highlighted{
       color: $overHighlightFg;
       background-color: $overHighlightBg;
-    }
   }
-}

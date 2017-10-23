@@ -1,97 +1,106 @@
 import React, { Component } from "react";
-import SearchAutoComplete  from "./SearchAutoComplete";
+// import SearchAutoComplete  from "./SearchAutoComplete";
 import PropTypes from "prop-types";
-import DebounceInput from "react-debounce-input";
+import Autosuggest from "react-autosuggest";
+import Location from "../services/Location";
+import { withRouter } from 'react-router-dom';
+import Helpers from '../services/Helpers';
+// import debounceTimeoutounceInput from "react-debounce-input";
 
 import "./SearchBox.scss";
 
 class SearchBox extends Component {
 
-  static propTypes = {
-    "searchTerm":  PropTypes.string,
-  }
-
-  static defaultProps = {
-    "searchTerm": "",
-  }
-
   constructor(props){
     super(props);
 
-    /*
-     * Stores the state of the SearchBox's focus, and when not null, stores
-     * the id of timeout for cancellation 
-     */
-    this.focusCancelDebounce = null;
-
     this.state = {
       searchTerm: (props.searchTerm ? props.searchTerm : ""),
-      hasFocus: false,
+      suggestions: [],
+      isLoading: false,
     }
+
+    this.onChange = this.onChange.bind(this);
+    this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
+    this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
+    this.getSuggestionValue = this.getSuggestionValue.bind(this);
+
   }
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps.searchTerm){
-      this.setState({searchTerm: nextProps.searchTerm});
-    }
+  getSuggestionValue(suggestionChosen){
+    console.log(this);
+    this.props.history.push("/search/"
+      +Helpers.toUrlFriendly(suggestionChosen.description)
+      +"/"+suggestionChosen.place_id);
+
+    return suggestionChosen.description;
   }
 
-  _updateSearch(e){
-    this.setState({ searchTerm: e.target.value });
+  loadSuggestions(value) {
+    
+    this.setState({
+      isLoading: true
+    });
+    
+    Location.getSuggestions(value)
+      .then( (suggestions)=>{
+        console.log(suggestions);
+         this.setState( { isLoading: false, suggestions } );
+      } );
+
   }
 
-  /**
-   * Manage the focus state of this object, in conjuction with lostFocus
-   *
-   * Sets the focus to true if focus is gained, cancels any deferred instructions 
-   * from the blur (lostFocus)
-   */
-  _getsFocus(){
-    this.setState({ hasFocus: true });
-    if (this.focusCancelDebounce !== null){
-      clearTimeout(this.focusCancelDebounce);
-      this.focusCancelDebounce = null;
-    }
-  }
+  onChange(event, { newValue }) {
+    this.setState({
+      searchTerm: newValue
+    });
+  };
+    
+  onSuggestionsFetchRequested({ value }) {
+    this.loadSuggestions(value);
+  };
 
-  /**
-   * Manage the focus state of this object, in conjuction with getsFocus
-   *
-   * Sets a small delay after a blur to allow the focus to be retained
-   */
-  _lostFocus(){
-    this.focusCancelDebounce = setTimeout(()=>{
-      this.setState({ hasFocus: false });
-    }, 100);
+  onSuggestionsClearRequested() {
+    this.setState({
+      suggestions: []
+    });
+  };
+
+  renderSuggestion(suggestion) {
+    return (
+      <span>{suggestion.description}</span>
+    );
   }
 
   render() {
+
+    const inputProps = {
+      placeholder: "Search for locations near you",
+      value: this.state.searchTerm,
+      onChange: this.onChange
+    };
+
     return (
-      <div 
-        className="searchBox"
-        onFocus={this._getsFocus.bind(this)}
-        onBlur={this._lostFocus.bind(this)}
-      >
-      { /* This has a buggg, if you select the text and type-over, it clears it out */ }  
-        <DebounceInput
-          debounceTimeout={200} 
-          minLength={3}
-          placeholder="Search for groups" 
-          value={this.state.searchTerm} 
-          onChange={this._updateSearch.bind(this)}
-        />
-        { 
-          ( this.state.searchTerm !== "" && this.state.hasFocus )
-            ? <SearchAutoComplete
-              searchTerm={this.state.searchTerm}
-              onSelect={this._lostFocus.bind(this)}
-            />
-            : ""
-        }
-      </div>
+      <Autosuggest 
+        suggestions={this.state.suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        getSuggestionValue={this.getSuggestionValue}
+        renderSuggestion={this.renderSuggestion}
+        inputProps={inputProps} 
+      />
+
     ); // /
   }
 
 }
 
-export default SearchBox;
+SearchBox.propTypes = {
+  "searchTerm":  PropTypes.string,
+}
+
+SearchBox.defaultProps = {
+  "searchTerm": "",
+}
+
+export default withRouter(SearchBox);
