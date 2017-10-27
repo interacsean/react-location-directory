@@ -7,6 +7,10 @@ $searchBoxHeight: 1.5rem;
   & > input{
     height: $searchBoxHeight;
   }
+  width: 100%;
+}
+.react-autosuggest__input{
+  width: 100%;
 }
 
 .react-autosuggest__suggestions-container--open {
