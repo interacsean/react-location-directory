@@ -1,23 +1,26 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Result = (props)=>{
-
-	return(
-		<div className="listingResult" onclick={props.onSelect}>
-		  <h2>{props.listingName}</h2>
-		  <h3>{props.placeName}</h3>
-		  <span className="dist">{props.dist} miles away</span>
-		</div>
-	)
-}
+const Result = props => (
+  <div
+    className="listingResult"
+    onClick={props.onSelect}
+    role="menuitem"
+    key={props.key}
+    tabIndex={0}
+  >
+    <h2>{props.listingName}</h2>
+    <h3>{props.placeName}</h3>
+    <span className="dist">{props.dist} miles away</span>
+  </div>
+);
 
 Result.propTypes = {
-  "key": PropTypes.string.isReq,
-  "listingName": PropTypes.string.isReq,
-  "placeName": PropTypes.string.isReq,
-  "dist": PropTypes.number.isReq,
-  "onSelect": PropTypes.func.isReq
-}
+  key: PropTypes.string.isRequired,
+  listingName: PropTypes.string.isRequired,
+  placeName: PropTypes.string.isRequired,
+  dist: PropTypes.number.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
 
 export default Result;

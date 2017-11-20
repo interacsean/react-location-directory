@@ -1,15 +1,9 @@
-import React, { Component } from "react";
+import React from 'react';
 
-class Listing extends Component {
-
-  render() {
-    return (
-    <div className="pg-listing">
-      <h1>Listing Page</h1>
-    </div>
-    );
-  }
-
-}
+const Listing = () => (
+  <div className="pg-listing">
+    <h1>Listing Page</h1>
+  </div>
+);
 
 export default Listing;

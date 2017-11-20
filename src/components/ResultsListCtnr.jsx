@@ -1,68 +1,67 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import Location from "../services/Location";
-import ListingData from "../services/ListingData";
-import ResultsList from "./ResultsList";
-
+import Location from '../services/Location';
+import ListingData from '../services/ListingData';
+import ResultsList from './ResultsList';
 
 /**
  * The list of search results.
  */
 class ResultsListCtnr extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this._refreshPlaceDetails(props.locCode);
+    this.refreshPlaceDetails(props.locCode);
     this.state = {
-      "searchTerm": props.searchTerm,
-      "locCode": props.locCode,
-      "results": [],
-      "isSearching": true
+      searchTerm: props.searchTerm,
+      locCode: props.locCode,
+      results: [],
+      isSearching: true,
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    this._refreshPlaceDetails(nextProps.locCode);
+    this.refreshPlaceDetails(nextProps.locCode);
     this.setState({
-      "searchTerm": nextProps.searchTerm,
-      "locCode": nextProps.locCode,
-      "isSearching": true
+      searchTerm: nextProps.searchTerm,
+      locCode: nextProps.locCode,
+      isSearching: true,
     });
   }
 
-  _refreshPlaceDetails(locCode) {
-    if (locCode !== ""){
+  refreshPlaceDetails(locCode) {
+    if (locCode !== '') {
       // Tidyup: Possibly a better way to chain these promises.
-      Location.getPlaceDetails(locCode).then( ( placeDetails )=>{
-        ListingData.getListingsNearPlace( placeDetails ).then( (results)=>{
-          this.setState( {"results": results, "isSearching": false} );  
-        } );
+      Location.getPlaceDetails(locCode).then((placeDetails) => {
+        ListingData.getListingsNearPlace(placeDetails).then((results) => {
+          this.setState({ results, isSearching: false });
+        });
       });
     }
   }
 
-  render(){
+  render() {
     return (
-      <ResultsList 
-        results={this.state.results} 
+      <ResultsList
+        results={this.state.results}
         searching={this.state.isSearching}
         resultSelected={this.props.resultSelected}
       />
     );
   }
-  
 }
 
 ResultsListCtnr.propTypes = {
-  "searchTerm": PropTypes.string,
-  "locCode": PropTypes.string,
-  "resultSelected": PropTypes.func.isReq,
-}
+  searchTerm: PropTypes.string,
+  locCode: PropTypes.string,
+  resultSelected: PropTypes.func.isRequired,
+};
 
 ResultsListCtnr.defaultProps = {
-  "searchTerm": "",
-  "locCode": "",
-}
+  searchTerm: '',
+  locCode: '',
+  resultSelected: () => null,
+};
 
 export default ResultsListCtnr;

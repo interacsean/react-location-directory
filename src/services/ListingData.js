@@ -1,6 +1,6 @@
 
 // Replace this with a `DataSource` linked to something actual.
-import DataSource from "./DataSource/DataSourceDummy.js";
+import DataSource from './DataSource/DataSourceDummy';
 
 // class ListingDataRequestObj {
 
@@ -23,26 +23,21 @@ class ListingData {
    *
    * @returns  Promise    A promise that resolves to an array of listings
    */
-  static getListingsNearPlace( placeData ){
-
+  static getListingsNearPlace(placeData) {
     /*
      * This clearly just returns test data and would need to be coded out
      * to connect to another data service / API.
      *
      * I also know this is not the most effective way to even provide test
-     * data. In reality there 
+     * data. In reality there
      */
-    return new Promise( (resolve, reject)=>{
-      
+    return new Promise((resolve, reject) => (
       // Proxy at the moment
-      return DataSource.listingsByLocation( placeData )
-        .then( resolve )
-        .catch( reject );
-
-    });
-
+      DataSource.listingsByLocation(placeData)
+        .then(resolve)
+        .catch(reject)
+    ));
   }
-
 }
 
 export default ListingData;

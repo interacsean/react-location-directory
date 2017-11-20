@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-autosuggest": "^9.3.2",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-router-prop-types": "0.0.2"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",
@@ -40,7 +42,6 @@
     "postcss-flexbugs-fixes": "3.0.0",
     "postcss-loader": "2.0.5",
     "promise": "7.1.1",
-    "prop-types": "^15.5.10",
     "react-dev-utils": "^3.0.0",
     "react-error-overlay": "^1.0.7",
     "sass-loader": "^6.0.6",
