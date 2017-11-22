@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
@@ -11,28 +11,37 @@ import Helpers from '../services/Helpers';
 
 import './Home.scss';
 
-const Home = (props) => {
-  const theSearchTerm = () => (
-    props.match.params.locCode ?
+class Home extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.resultSelected = this.resultSelected.bind(this);
+    this.newSearchTermSelected = this.newSearchTermSelected.bind(this);
+    this.theSearchTerm = this.theSearchTerm.bind(this);
+  }
+
+  theSearchTerm() {
+    this.props.match.params.locCode ?
       Helpers.fromUrlFriendly(props.match.params.locFriendly) :
       null
-  );
+  };
 
-  const newSearchTermSelected = (suggestionChosen) => {
+  newSearchTermSelected(suggestionChosen) {
     this.props.history.push(`/search/${Helpers.toUrlFriendly(suggestionChosen.description)}/${suggestionChosen.place_id}`);
   };
 
-  const resultSelected = (resultChosen) => {
+  resultSelected (resultChosen) {
     this.props.history.push(`/listing/${Helpers.toUrlFriendly(resultChosen.description)}/${resultChosen.id}`);
   };
 
-  return (
+  render() {(
     <div className="pg-Home">
       <header className="siteHeader">
         <SiteLogo />
         <SiteNav />
         <SearchBox
-          searchTerm={theSearchTerm()}
+          searchTerm={this.theSearchTerm()}
           className="searchBox"
           suggestionSelected={newSearchTermSelected}
         />
@@ -40,14 +49,14 @@ const Home = (props) => {
       {
         theSearchTerm()
           ? <ResultsListCtnr
-            searchTerm={theSearchTerm()}
-            locCode={props.match.params.locCode}
+            searchTerm={this.theSearchTerm()}
+            locCode={this.props.match.params.locCode}
             resultSelected={resultSelected}
           />
           : ''
       }
     </div>
-  );
+  )};
 };
 
 Home.propTypes = {
