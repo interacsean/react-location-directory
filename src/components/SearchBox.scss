@@ -4,13 +4,11 @@ $searchBoxHeight: 1.5rem;
 
 .react-autosuggest__container{
   position: relative;
-  & > input{
-    height: $searchBoxHeight;
-  }
   width: 100%;
 }
 .react-autosuggest__input{
   width: 100%;
+  height: $searchBoxHeight;
 }
 
 .react-autosuggest__suggestions-container--open {

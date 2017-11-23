@@ -1,8 +1,9 @@
 @import "../variables.scss";
 
 $resultsListingCollapseWidth: 550px;
+$resultsListingTwoCol: 720px;
 
-.resultsList{
+.resultsListCtnr{
   padding:0 10px;
 
   @media (min-width: $resultsListingCollapseWidth){ 
@@ -15,6 +16,7 @@ $resultsListingCollapseWidth: 550px;
   position: relative;
   padding:0.5em;
   border-bottom:1px solid $lightSeparator;
+  cursor: pointer;
 
   &:last-child{
     border-bottom: none;
@@ -39,9 +41,10 @@ $resultsListingCollapseWidth: 550px;
   @media (min-width: $resultsListingCollapseWidth){ 
     @include border-box;
 
-    width: calc(33% - 10px);
+    display:inline-block;
+    width: calc(50% - 10px);
+    max-width: calc(50% - 10px);
     min-width: 14em;
-    max-width: 20em;
     flex: 1;
     margin: 5px;
     border: 1px solid $lightSeparator;
@@ -55,7 +58,10 @@ $resultsListingCollapseWidth: 550px;
       text-align:right;
       display: inline-block;
     }
-
-
   }
+  @media (min-width: $resultsListingTwoCol){
+    width: calc(33% - 10px);
+    max-width: calc(33% - 10px);
+  } 
+    
 }

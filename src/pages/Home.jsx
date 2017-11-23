@@ -22,8 +22,8 @@ class Home extends Component {
   }
 
   theSearchTerm() {
-    this.props.match.params.locCode ?
-      Helpers.fromUrlFriendly(props.match.params.locFriendly) :
+    return this.props.match.params.locCode ?
+      Helpers.fromUrlFriendly(this.props.match.params.locFriendly) :
       null
   };
 
@@ -35,7 +35,9 @@ class Home extends Component {
     this.props.history.push(`/listing/${Helpers.toUrlFriendly(resultChosen.description)}/${resultChosen.id}`);
   };
 
-  render() {(
+  render() {
+
+    return (
     <div className="pg-Home">
       <header className="siteHeader">
         <SiteLogo />
@@ -43,17 +45,17 @@ class Home extends Component {
         <SearchBox
           searchTerm={this.theSearchTerm()}
           className="searchBox"
-          suggestionSelected={newSearchTermSelected}
+          suggestionSelected={this.newSearchTermSelected}
         />
       </header>
       {
-        theSearchTerm()
+        this.theSearchTerm()
           ? <ResultsListCtnr
             searchTerm={this.theSearchTerm()}
             locCode={this.props.match.params.locCode}
-            resultSelected={resultSelected}
+            resultSelected={this.resultSelected}
           />
-          : ''
+            : <div style={{ padding: '20px' }}>Make your search above</div>
       }
     </div>
   )};

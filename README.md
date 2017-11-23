@@ -2,11 +2,10 @@
 
 This project is a tech demo for a location based directory.  I hope to develop it into a usable boilerplate that can be easily set up.
 
-_It was built quickly and there are many improvements yet to be made (see Todo list)_
+_This project is a work in progress_
 
 ### Please Note:
-* Search results drawn from DataSourceDummy are random variations on the selected location. 
-* Occasionally (_by design!_) DataSourceDummy will mimick there being no search results in the selected location.
+* Search results are randomly generated (from DataSourceDummy) and will change each time, ocassionally returning no results to mimick there being no relevant results in the search vicinity.
 * The links from the nav menu do not have active pages and will 404.
 
 ## Techonolgies + Methodologies used:
@@ -19,12 +18,11 @@ _It was built quickly and there are many improvements yet to be made (see Todo l
 
 ## Todo list:
 * Create a Listing Page route for page details
-* In prod build, have SCSS build into external css file
-* Address usability issue of not being able to use keyboard with SearchAutoComplete box
+* Migrate CSS to emotionjs
+* (or SCSS autoprefixer [https://github.com/postcss/autoprefixer] )
 * Improve documentation of classes, methods etc
 * Tighten up the spec of the ListingData service to refine returned object.
 * Make it pretty
-* Add SCSS autoprefixer [https://github.com/postcss/autoprefixer]
 * Write component tests
 * Search for `Tidyup` for pieces of code I think I could write more efficiently.
 
