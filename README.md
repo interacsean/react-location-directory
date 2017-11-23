@@ -1,12 +1,13 @@
 # Location directory
 
-This project is a tech demo for a location based directory.  I hope to develop it into a usable boilerplate that can be easily set up.
-
 _This project is a work in progress_
+
+This project is a ReactJS exercise to create a front-end for a network of community support groups in order for those in need to be able to locate their nearest group.  The intent is to create is as a white-label open source product so other groups can leverage this work.
 
 ### Please Note:
 * Search results are randomly generated (from DataSourceDummy) and will change each time, ocassionally returning no results to mimick there being no relevant results in the search vicinity.
 * The links from the nav menu do not have active pages and will 404.
+* Visual design is still in wireframe
 
 ## Techonolgies + Methodologies used:
 
