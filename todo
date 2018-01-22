@@ -6,5 +6,11 @@ data service
 make it pretty
 scss autoprefixer [https://github.com/postcss/autoprefixer]
 write component tests
+dropdown keyboard interaction isn't great
+
+Could use redux for:
+ caching search results
+ storing the current search term
+Could create a Layout component that has searchTerm in state (/ context)
 
 search for "Tidyup:"

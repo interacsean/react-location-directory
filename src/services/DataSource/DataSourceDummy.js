@@ -18,7 +18,7 @@ class DataSourceDummy {
      * Tidyup: This gets a bit `imperitive` so could be up for refactoring one day... one day...
      */
     // Tidyup: linter tells me "Don't make functions within a loop  no-loop-func"
-    const loopLength = Math.floor(randPlaces.length * Math.random());
+    const loopLength = Math.floor((randPlaces.length - 3) * Math.random()) + 3;
     // eslint-disable-next-line 
     for (let i = 0; i < loopLength; i = i + 1) {
       const randPlaceKey = Math.floor(randPlaces.length * Math.random());
@@ -48,6 +48,7 @@ class DataSourceDummy {
     ];
 
     return {
+      id: Math.floor(Math.random() * 100),
       listing_name: randNames[Math.floor(Math.random() * randNames.length)]
         .replace(/%1/g, placeNameParts[0])
         .replace(/%2/g, placeNameParts[1]), // Could use reduce on placeNameParts and use 3rd arg for %token

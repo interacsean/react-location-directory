@@ -12,9 +12,8 @@ class SearchBox extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
-      searchTerm: (props.searchTerm ? props.searchTerm : ''),
+      searchTerm: props.searchTerm || '',
       suggestions: [],
       isLoading: false,
     };
@@ -27,12 +26,23 @@ class SearchBox extends Component {
     this.debounceTimeout = null;
   }
 
+  componentWillReceiveProps(props){    
+    if (props.searchTerm !== this.state.searchTerm){
+      this.setState({
+        searchTerm: props.searchTerm
+      })
+    }
+  }
+
+  // When the search text is updated (via keyboard)
   onChange(event, { newValue }) {
     this.setState({
       searchTerm: newValue,
     });
   }
 
+  // Also every time text is updated, except when the input value is empty
+  // This could manage some debouncing
   onSuggestionsFetchRequested({ value }) {
     this.loadSuggestions(value);
   }
@@ -43,9 +53,9 @@ class SearchBox extends Component {
     });
   }
 
+  // When an autocompleted item is selected
   getSuggestionValue(suggestionChosen) {
-    console.log(this.props);
-    this.props.suggestionSelected(suggestionChosen);
+    this.props.onSearchTermSelected(suggestionChosen);
 
     return suggestionChosen.description;
   }
@@ -63,7 +73,7 @@ class SearchBox extends Component {
 
   render() {
     const inputProps = {
-      placeholder: 'Search for locations near you',
+      placeholder: this.state.searchTerm || 'Search for locations near you',
       value: this.state.searchTerm,
       onChange: this.onChange,
     };
@@ -86,7 +96,7 @@ class SearchBox extends Component {
 SearchBox.propTypes = {
   searchTerm: PropTypes.string,
   className: PropTypes.string,
-  suggestionSelected: PropTypes.func.isRequired,
+  onSearchTermSelected: PropTypes.func.isRequired,
 };
 
 SearchBox.defaultProps = {

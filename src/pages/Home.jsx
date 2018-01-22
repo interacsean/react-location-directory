@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+
 import ReactRouterPropTypes from 'react-router-prop-types';
 
-import SiteLogo from '../components/SiteLogo';
-import SiteNav from '../components/SiteNav';
-import SearchBox from '../components/SearchBox';
-import ResultsListCtnr from '../components/ResultsListCtnr';
 import Helpers from '../services/Helpers';
+import withLocDirRouter from '../components/withLocDirRouter';
+import Header from '../components/Header';
+import ResultsListCtnr from '../components/ResultsListCtnr';
 
 import './Home.scss';
 
@@ -16,46 +15,30 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.resultSelected = this.resultSelected.bind(this);
-    this.newSearchTermSelected = this.newSearchTermSelected.bind(this);
-    this.theSearchTerm = this.theSearchTerm.bind(this);
+    this.onResultSelected = this.onResultSelected.bind(this);
   }
 
-  theSearchTerm() {
-    return this.props.match.params.locCode ?
-      Helpers.fromUrlFriendly(this.props.match.params.locFriendly) :
-      null
-  };
-
-  newSearchTermSelected(suggestionChosen) {
-    this.props.history.push(`/search/${Helpers.toUrlFriendly(suggestionChosen.description)}/${suggestionChosen.place_id}`);
-  };
-
-  resultSelected (resultChosen) {
-    this.props.history.push(`/listing/${Helpers.toUrlFriendly(resultChosen.description)}/${resultChosen.id}`);
+  onResultSelected (resultChosen) {
+    console.log(this.props);
+    this.props.history.push(
+      `/listing/${Helpers.toUrlFriendly(resultChosen.listing_name)}/${resultChosen.id}/${this.props.theSearchTerm()}/${this.props.theSearchLocId()}`
+    );
   };
 
   render() {
-
     return (
     <div className="pg-Home">
-      <header className="siteHeader">
-        <SiteLogo />
-        <SiteNav />
-        <SearchBox
-          searchTerm={this.theSearchTerm()}
-          className="searchBox"
-          suggestionSelected={this.newSearchTermSelected}
+      <Header
+        searchTerm={this.props.theSearchTerm()}
         />
-      </header>
       {
-        this.theSearchTerm()
+        this.props.theSearchTerm()
           ? <ResultsListCtnr
-            searchTerm={this.theSearchTerm()}
+            searchTerm={this.props.theSearchTerm()}
             locCode={this.props.match.params.locCode}
-            resultSelected={this.resultSelected}
+            onResultSelected={this.onResultSelected}
           />
-            : <div style={{ padding: '20px' }}>Make your search above</div>
+          : <div style={{ padding: '20px' }}>Make your search above</div>
       }
     </div>
   )};
@@ -63,6 +46,7 @@ class Home extends Component {
 
 Home.propTypes = {
   match: ReactRouterPropTypes.match.isRequired,
+  theSearchTerm: PropTypes.func.isRequired
 };
 
-export default withRouter(Home);
+export default withLocDirRouter(Home);

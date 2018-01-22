@@ -1,6 +1,6 @@
 @import "../variables.scss";
 
-$searchBoxHeight: 1.5rem;
+$searchBoxHeight: 1.67rem;
 
 .react-autosuggest__container{
   position: relative;
@@ -8,6 +8,8 @@ $searchBoxHeight: 1.5rem;
 }
 .react-autosuggest__input{
   width: 100%;
+  padding: 0 0.5em;
+  box-sizing: border-box;
   height: $searchBoxHeight;
 }
 

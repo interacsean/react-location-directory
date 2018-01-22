@@ -46,7 +46,7 @@ class ResultsListCtnr extends Component {
       <ResultsList
         results={this.state.results}
         searching={this.state.isSearching}
-        resultSelected={this.props.resultSelected}
+        onResultSelected={this.props.onResultSelected}
       />
     );
   }
@@ -55,13 +55,12 @@ class ResultsListCtnr extends Component {
 ResultsListCtnr.propTypes = {
   searchTerm: PropTypes.string,
   locCode: PropTypes.string,
-  resultSelected: PropTypes.func.isRequired,
+  onResultSelected: PropTypes.func.isRequired,
 };
 
 ResultsListCtnr.defaultProps = {
   searchTerm: '',
   locCode: '',
-  resultSelected: () => null,
 };
 
 export default ResultsListCtnr;

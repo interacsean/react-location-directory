@@ -17,7 +17,7 @@ const App = () => (
   <Router>
     <div className="App">
       <Switch>
-        <Route path="/listing/:id" component={Listing} />
+        <Route path="/listing/:friendlyName/:id/:searchTerm?/:searchLocId?" component={Listing} />
         <Route exact path="/search/:locFriendly/:locCode?" component={Home} />
         <Route exact path="/" component={Home} />
         <Route component={NotFound} />

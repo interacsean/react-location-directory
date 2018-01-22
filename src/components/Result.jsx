@@ -6,7 +6,6 @@ const Result = props => (
     className="listingResult"
     onClick={props.onSelect}
     role="menuitem"
-    key={props.key}
     tabIndex={0}
   >
     <h2>{props.listingName}</h2>
@@ -16,7 +15,7 @@ const Result = props => (
 );
 
 Result.propTypes = {
-  key: PropTypes.string.isRequired,
+  // key: PropTypes.string,
   listingName: PropTypes.string.isRequired,
   placeName: PropTypes.string.isRequired,
   dist: PropTypes.number.isRequired,
