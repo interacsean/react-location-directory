@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import Helpers from '../services/Helpers';
@@ -19,18 +18,15 @@ class Home extends Component {
   }
 
   onResultSelected (resultChosen) {
-    console.log(this.props);
     this.props.history.push(
-      `/listing/${Helpers.toUrlFriendly(resultChosen.listing_name)}/${resultChosen.id}/${this.props.theSearchTerm()}/${this.props.theSearchLocId()}`
+      `/listing/${Helpers.toUrlFriendly(resultChosen.listing_name)}/${resultChosen.id}/${this.props.theSearchTerm()}/${this.props.match.params.locCode}`
     );
   };
 
   render() {
     return (
     <div className="pg-Home">
-      <Header
-        searchTerm={this.props.theSearchTerm()}
-        />
+      <Header searchTerm={this.props.theSearchTerm()} />
       {
         this.props.theSearchTerm()
           ? <ResultsListCtnr
