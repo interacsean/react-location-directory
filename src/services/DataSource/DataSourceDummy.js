@@ -57,6 +57,14 @@ class DataSourceDummy {
       dist: Math.round(Math.random() * 25) * 10,
     };
   }
+
+  static getListing(id){
+
+    return new Promise(resolve => setTimeout(()=>resolve({
+      listing_name: 'Listing name',
+      desc: '<p>A group for those interested in a topic</p>',
+    }), 1500));
+  }
 }
 
 export default DataSourceDummy;

@@ -38,6 +38,14 @@ class ListingData {
         .catch(reject)
     ));
   }
+
+  static getListing(id) {
+    return new Promise((resolve, reject) => (
+      DataSource.getListing(id)
+        .then(resolve)
+        .catch(reject)
+    ));
+  }
 }
 
 export default ListingData;

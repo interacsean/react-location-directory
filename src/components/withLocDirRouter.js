@@ -11,28 +11,18 @@ import Helpers from '../services/Helpers';
  * @return Component 
  */
 const withLocDirRouter = Comp => {
-
-    // const CompWRouter = (Comp);
-
-    class CompWithLocDirCust extends Component {
-
-        constructor(cProps) {
-            super(cProps);
-
-            // this.theSearchTerm = this.theSearchTerm.bind(this);
-            this.theSearchTerm = () => (
-                this.props.match.params.locCode 
-                    ? Helpers.fromUrlFriendly(this.props.match.params.locFriendly) 
-                    : null
-            );
-            this.theSearchLocId = () => (
-                this.props.match.params.locCode || null
-            );
-        }
-
-        render() {
-            return <Comp {...this.props} theSearchTerm={this.theSearchTerm} theSearchLocId={this.theSearchLocId} />
-        }
+    
+    const CompWithLocDirCust = (props) => {
+        
+        const theSearchTerm = () => (
+            props.match.params.locCode 
+                ? Helpers.fromUrlFriendly(props.match.params.locFriendly) 
+                : null
+        );
+        const theSearchLocId = () => (
+            props.match.params.locCode || null
+        );
+        return <Comp {...props} theSearchTerm={theSearchTerm} theSearchLocId={theSearchLocId} />
     }
 
     return withRouter(CompWithLocDirCust);
